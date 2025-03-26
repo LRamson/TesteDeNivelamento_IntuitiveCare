@@ -11,7 +11,12 @@ from typing import List
 
 
 def download_pdfs(base_url: str, download_folder: str) -> List[str]:
-   
+    """Baixa os arquivos PDF da URL fornecida e os salva na pasta download_folder.
+    
+    Args:
+        base_url (str): URL da página a ser visitada.
+        download_folder (str): Pasta onde os arquivos PDF serão salvos."""
+    
     # Faz a requisição GET para a URL fornecida
     response = requests.get(base_url)
     response.raise_for_status()
@@ -46,7 +51,12 @@ def download_pdfs(base_url: str, download_folder: str) -> List[str]:
     return downloaded_files
 
 def zip_files(file_list: List[str], output_zip: str) -> None:
-
+    """Cria um arquivo ZIP com os arquivos fornecidos.
+    
+    Args:
+        file_list (List[str]): Lista com os caminhos dos arquivos a serem adicionados ao ZIP.
+        output_zip (str): Nome do arquivo ZIP a ser criado."""
+    
     with zipfile.ZipFile(output_zip, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for file in file_list:
             zipf.write(file, os.path.basename(file))
