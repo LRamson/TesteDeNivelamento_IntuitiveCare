@@ -10,10 +10,10 @@ service = OperatorService()
 @bp.route('/operators/search', methods=['GET'])
 def search_operators():
     try:
-        # Validate query params
+        # Valida os parametros
         search_params = OperatorSearchSchema(**request.args)
         
-        # Perform search
+        # Realiza a busca
         results = service.search_operators(search_params)
         return jsonify(results)
     
