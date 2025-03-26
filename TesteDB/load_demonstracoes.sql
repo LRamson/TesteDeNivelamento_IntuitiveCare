@@ -1,8 +1,8 @@
-LOAD DATA INFILE 'C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\combined.csv'
+LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\combined.csv'
 INTO TABLE demonstracoes_contabeis
 FIELDS TERMINATED BY ';'
 ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
+LINES TERMINATED BY '\r\n'
 IGNORE 1 ROWS
 (@data, reg_ans, cd_conta_contabil, descricao, @vl_saldo_inicial, @vl_saldo_final)
 SET 

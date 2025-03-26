@@ -1,4 +1,4 @@
-LOAD DATA INFILE 'C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\Relatorio_cadop.csv'
+LOAD DATA INFILE 'C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Relatorio_cadop.csv'
 INTO TABLE operadoras
 FIELDS TERMINATED BY ';'
 ENCLOSED BY '"'
