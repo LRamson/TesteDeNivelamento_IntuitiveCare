@@ -1,14 +1,15 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from http import HTTPStatus
 from ..services.operator_service import OperatorService
 from ..schemas.search import OperatorSearchSchema
 from pydantic import ValidationError
 
 bp = Blueprint('operators', __name__)
-service = OperatorService()
 
 @bp.route('/operators/search', methods=['GET'])
 def search_operators():
+    service = current_app.extensions['operator_service']
+
     try:
         # Valida os parametros
         search_params = OperatorSearchSchema(**request.args)
@@ -24,6 +25,8 @@ def search_operators():
 
 @bp.route('/operators/filters/<field>', methods=['GET'])
 def get_filter_options(field: str):
+    service = current_app.extensions['operator_service']
+    
     try:
         values = service.get_distinct_values(field)
         return jsonify({"field": field, "values": values})

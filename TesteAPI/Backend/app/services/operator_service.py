@@ -1,3 +1,5 @@
+import os
+from pathlib import Path
 from typing import List, Dict, Optional
 from ..models.operator import Operator
 from ..schemas.search import OperatorSearchSchema
@@ -9,10 +11,20 @@ class OperatorService:
         # mas para fins de simplicidade, estou apenas salvando
         # em memória.
         self.operators: List[Operator] = []
+        self.ALLOWED_FILTERS = {'uf', 'cidade', 'regiao_comercializacao', 'modalidade'}
     
     def load_data(self, file_path: str) -> None:
         """Carrega e realiza parse do arquivo CSV"""
-        self.operators = Operator.load_from_csv(file_path)
+
+        project_root = Path(__file__).parent.parent
+
+        csv_path = project_root / "files" / "Relatorio_cadop.csv"
+        
+        if not csv_path.exists():
+            raise FileNotFoundError(f"CSV file not found at {csv_path}")
+            
+        self.operators = Operator.load_from_csv(csv_path)
+        print(f"Loaded {len(self.operators)} operators")
     
     def search_operators(self, search_params: OperatorSearchSchema) -> Dict:
         """
@@ -87,9 +99,8 @@ class OperatorService:
     
     def get_distinct_values(self, field: str) -> List[str]:
         """Retorna valores distintos para um campo específico (ex: UF)"""
-        if not hasattr(Operator, field):
-            raise ValueError(f"Invalid field: {field}")
-            
+        if field not in self.ALLOWED_FILTERS:
+            raise ValueError(f"Field {field} not allowed")
         return sorted({
             getattr(op, field) 
             for op in self.operators 

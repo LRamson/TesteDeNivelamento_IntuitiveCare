@@ -2,3 +2,9 @@
 /TesteDB/Arquivos/*.csv
 
 /TesteAPI/Frontend/operadores-front/node_modules
+
+/TesteAPI/Backend/app/__pycache__
+/TesteAPI/Backend/app/models/__pycache__
+/TesteAPI/Backend/app/routes/__pycache__
+/TesteAPI/Backend/app/schemas/__pycache__
+/TesteAPI/Backend/app/services/__pycache__
