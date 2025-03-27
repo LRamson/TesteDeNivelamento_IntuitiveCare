@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field
 from typing import Optional
 
 class OperatorSearchSchema(BaseModel):
+    search_term: str = Field(None, description="Standard search - checks company name, trade name and CNPJ")
     razao_social: Optional[str] = Field(None, description="Filter by company name")
     nome_fantasia: Optional[str] = Field(None, description="Filter by trade name")
     cnpj: Optional[str] = Field(None, description="Filter by CNPJ")

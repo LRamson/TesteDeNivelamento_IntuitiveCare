@@ -32,37 +32,19 @@ class OperatorService:
         """
         filtered = self.operators
 
-        if search_params.razao_social:
-            filtered = self._filter_by_field(
-                filtered, 
-                "razao_social", 
-                search_params.razao_social,
-                exact=False
-            )
+        # Busca geral 
+        if search_params.search_term:
+            filtered = self._text_search(filtered, search_params.search_term)
 
-        if search_params.nome_fantasia:
-            filtered = self._filter_by_field(
-                filtered, 
-                "nome_fantasia", 
-                search_params.nome_fantasia,
-                exact=False
-            )
-        
+        # Filtros
         if search_params.uf:
-            filtered = self._filter_by_field(
-                filtered,
-                "uf",
-                search_params.uf.upper(),
-                exact=True
-            )
+            filtered = self._filter_by_field(filtered, "uf", search_params.uf.upper(), exact=True)
+            
+        if search_params.cidade:
+            filtered = self._filter_by_field(filtered, "cidade", search_params.cidade, exact=True)
 
-        if search_params.cnpj:
-            filtered = self._filter_by_field(
-                filtered,
-                "cnpj",
-                search_params.cnpj.upper(),
-                exact=True
-            )
+        if search_params.modalidade:
+            filtered = self._filter_by_field(filtered, "modalidade", search_params.modalidade, exact=True)
         
         paginated = filtered[
             search_params.offset : search_params.offset + search_params.limit
@@ -74,6 +56,22 @@ class OperatorService:
             "offset": search_params.offset,
             "results": [op.to_dict() for op in paginated]
         }
+    
+    def _text_search(self, operators: List[Operator], search_term: str) -> List[Operator]:
+        """Busca entre razão social, nome fantasia e CNPJ"""
+        if not search_term:
+            return operators
+            
+        search_term = search_term.lower()
+        results = []
+        
+        for op in operators:
+            if (op.razao_social and search_term in op.razao_social.lower()) or \
+            (op.nome_fantasia and search_term in op.nome_fantasia.lower()) or \
+            (op.cnpj and search_term in op.cnpj.lower()):
+                results.append(op)
+            
+        return results
     
     def _filter_by_field(
         self, 
