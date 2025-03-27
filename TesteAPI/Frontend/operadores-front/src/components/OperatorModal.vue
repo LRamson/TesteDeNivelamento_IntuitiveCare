@@ -26,21 +26,39 @@ export default {
     methods: {
         formatKey(key) {
             const map = {
-                'Registro_ANS': 'Registro ANS',
-                'Razao_Social': 'Razão Social',
-                'Nome_Fantasia': 'Nome Fantasia',
-                'Endereco_eletronico': 'Email',
-                'Data_Registro_ANS': 'Data de Registro',
-                'Regiao_de_Comercializacao': 'Região de Comercialização',
-                'Cargo_Representante': 'Cargo do Representante'
+                'registro_ans': 'Registro ANS',
+                'cnpj': 'CNPJ',
+                
+                'razao_social': 'Razão Social',
+                'nome_fantasia': 'Nome Fantasia',
+                'modalidade': 'Modalidade',
+                'data_registro_ans': 'Data de Registro',
+                
+                'logradouro': 'Logradouro',
+                'numero': 'Número',
+                'complemento': 'Complemento',
+                'bairro': 'Bairro',
+                'cidade': 'Cidade',
+                'uf': 'UF',
+                'cep': 'CEP',
+                
+                'ddd': 'DDD',
+                'telefone': 'Telefone',
+                'fax': 'Fax',
+                'endereco_eletronico': 'E-mail',
+                
+                'representante': 'Representante',
+                'cargo_representante': 'Cargo do Representante',
+                
+                'regiao_comercializacao': 'Região de Comercialização'
             };
             return map[key] || key.replace(/_/g, ' ');
         },
         formatValue(key, value) {
             if (value === null || value === undefined) return 'N/A'
-            if (key === 'CNPJ') return this.formatCNPJ(value)
-            if (key === 'Telefone') return this.formatPhone(this.operator.DDD, value)
-            if (key === 'Data_Registro_ANS') return this.formatDate(value)
+            if (key === 'cnpj') return this.formatCNPJ(value)
+            if (key === 'telefone') return this.formatPhone(this.operator.DDD, value)
+            if (key === 'data_registro_ans') return this.formatDate(value)
             return value
         },
         formatCNPJ(cnpj) {

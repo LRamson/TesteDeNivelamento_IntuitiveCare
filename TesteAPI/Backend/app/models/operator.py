@@ -57,13 +57,25 @@ class Operator:
         return operators
     
     def to_dict(self) -> dict:
-        return {
-            "registro_ans": self.registro_ans,
-            "cnpj": self.cnpj,
-            "razao_social": self.razao_social,
-            "nome_fantasia": self.nome_fantasia,
-            "modalidade": self.modalidade,
-            "cidade": self.cidade,
-            "uf": self.uf,
-            "regiao_comercializacao": self.regiao_comercializacao,
-        }
+            return {
+                "registro_ans": self.registro_ans,
+                "cnpj": self.cnpj,
+                "razao_social": self.razao_social,
+                "nome_fantasia": self.nome_fantasia,
+                "modalidade": self.modalidade,
+                "logradouro": self.logradouro,
+                "numero": self.numero,
+                "complemento": self.complemento,
+                "bairro": self.bairro,
+                "cidade": self.cidade,
+                "uf": self.uf,
+                "cep": self.cep,
+                "ddd": self.ddd,
+                "telefone": self.telefone,
+                "fax": self.fax,
+                "endereco_eletronico": self.endereco_eletronico,
+                "representante": self.representante,
+                "cargo_representante": self.cargo_representante,
+                "regiao_comercializacao": self.regiao_comercializacao,
+                "data_registro_ans": self.data_registro_ans
+            }
