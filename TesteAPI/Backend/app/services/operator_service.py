@@ -95,12 +95,18 @@ class OperatorService:
                     filtered.append(op)
         return filtered
     
-    def get_distinct_values(self, field: str) -> List[str]:
+    def get_distinct_values(self, field: str, uf_filter: str) -> List[str]:
         """Retorna valores distintos para um campo específico (ex: UF)"""
         if field not in self.ALLOWED_FILTERS:
             raise ValueError(f"Field {field} not allowed")
+        
+        operators = self.operators
+        
+        if uf_filter:
+            operators = self._filter_by_field(operators, "uf", uf_filter, exact=True)
+
         return sorted({
             getattr(op, field) 
-            for op in self.operators 
+            for op in operators 
             if getattr(op, field)
         })

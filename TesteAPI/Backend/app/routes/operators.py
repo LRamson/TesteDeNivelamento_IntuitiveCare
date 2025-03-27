@@ -26,9 +26,10 @@ def search_operators():
 @bp.route('/operators/filters/<field>', methods=['GET'])
 def get_filter_options(field: str):
     service = current_app.extensions['operator_service']
-    
+
     try:
-        values = service.get_distinct_values(field)
+        uf_filter = request.args.get('uf', '').upper()
+        values = service.get_distinct_values(field, uf_filter)
         return jsonify({"field": field, "values": values})
     except ValueError as e:
         return jsonify({"error": str(e)}), HTTPStatus.BAD_REQUEST
