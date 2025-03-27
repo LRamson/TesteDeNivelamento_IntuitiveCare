@@ -31,7 +31,7 @@ import { searchOperators } from '@/composables/useOperators'
 export default {
     components: { OperatorSearch, OperatorList, OperatorModal },
     setup() {
-        const { operators, loading, error, search } = searchOperators()
+        const { operators, loading, error, totalResults, search } = searchOperators()
         const showModal = ref(false)
         const selectedOperator = ref(null)
 

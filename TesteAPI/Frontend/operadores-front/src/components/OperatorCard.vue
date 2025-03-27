@@ -1,19 +1,19 @@
 <template>
 <div class="operator-card" @click="$emit('show-details', operator)">
     <div class="card-header">
-        <h3>{{ operator.Razao_Social }}</h3>
-        <span class="badge">{{ operator.Modalidade }}</span>
+        <h3>{{ operator.razao_social }}</h3>
+        <span class="badge">{{ operator.modalidade }}</span>
     </div>
     
     <div class="card-body">
         <div class="info-row">
             <span class="label">Nome Fantasia: </span>
-            <span class="value"> {{ operator.Nome_Fantasia || 'N/A' }}</span>
+            <span class="value"> {{ operator.nome_fantasia || 'N/A' }}</span>
         </div>
         
         <div class="info-row">
             <span class="label">Localização: </span>
-            <span class="value">{{ operator.Cidade }}/{{ operator.UF }}</span>
+            <span class="value">{{ operator.cidade }}/{{ operator.uf }}</span>
         </div>
     </div>
 </div>
